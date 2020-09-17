@@ -54,20 +54,24 @@ public class Card extends TrelloEntity {
 
     public void updateCustomField(String idCustomFieldCustom, String type, String value) {
         CustomFieldsItem customFieldsItem = new CustomFieldsItem();
-        customFieldsItem.setValue(new CustomFieldsItem.CustomFieldItemValue());
-        switch (type) {
-            case "text":
-                customFieldsItem.getValue().setText(value);
-                break;
-            case "number":
-                customFieldsItem.getValue().setNumber(value);
-                break;
-            case "checked":
-                customFieldsItem.getValue().setChecked(value);
-                break;
-            case "date":
-                customFieldsItem.getValue().setDate(value);
-                break;
+        if (value != null) {
+            customFieldsItem.setValue(new CustomFieldsItem.CustomFieldItemValue());
+            switch (type) {
+                case "text":
+                    customFieldsItem.getValue().setText(value);
+                    break;
+                case "number":
+                    customFieldsItem.getValue().setNumber(value);
+                    break;
+                case "checked":
+                    customFieldsItem.getValue().setChecked(value);
+                    break;
+                case "date":
+                    customFieldsItem.getValue().setDate(value);
+                    break;
+            }
+        } else {
+            customFieldsItem.setValue(null);
         }
         trelloService.updateCustomField(id, idCustomFieldCustom, customFieldsItem);
     }

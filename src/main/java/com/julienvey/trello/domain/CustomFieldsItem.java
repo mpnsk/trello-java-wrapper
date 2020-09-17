@@ -1,44 +1,21 @@
 package com.julienvey.trello.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Date;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomFieldsItem extends TrelloEntity {
 
     private String id;
     private String idCustomField;
     private String idModel;
     private String modelType;
-
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     private CustomFieldItemValue value;
-
-    /* API */
-//    public void addLabels(String... labels) {
-//        trelloService.addLabelsToCard(id, labels);
-//    }
-//
-//    public void addComment(String comment) {
-//        trelloService.addCommentToCard(id, comment);
-//    }
-//
-//    public List<Action> getActions(Argument... filters) {
-//        return trelloService.getCardActions(id, filters);
-//    }
-//
-//    public List<Member> fetchMembers(Argument... args) {
-//        return trelloService.getCardMembers(id, args);
-//    }
-//
-//    public void deleteAttachment(String attachmentId) {
-//        trelloService.deleteAttachment(id, attachmentId);
-//    }
-//
-//    public void delete() {
-//        getTrelloService().deleteCard(id);
-//    }
 
     /* Accessors */
 
@@ -83,6 +60,7 @@ public class CustomFieldsItem extends TrelloEntity {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class CustomFieldItemValue {
         private String text;
         private String number;

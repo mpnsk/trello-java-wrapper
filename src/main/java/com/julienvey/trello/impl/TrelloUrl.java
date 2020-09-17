@@ -17,6 +17,7 @@ public class TrelloUrl {
     public static final String GET_BOARD_LABELS = "/boards/{boardId}/labels?";
     public static final String GET_BOARD_LISTS = "/boards/{boardId}/lists?";
     public static final String GET_BOARD_MEMBERSHIPS = "/boards/{boardId}/memberships?";
+    public static final String GET_BOARD_CUSTOM_FIELDS = "/boards/{boardId}/customFields?";
     public static final String GET_BOARD_MYPREFS = "/boards/{boardId}/myPrefs?";
     public static final String GET_BOARD_ORGANIZATION = "/boards/{boardId}/organization?";
     public static final String ADD_MEMBER_TO_BOARD = "/boards/{boardId}/members?";
@@ -39,6 +40,7 @@ public class TrelloUrl {
     public static final String GET_CARD_BOARD = "/cards/{cardId}/board?";
     public static final String GET_CARD_CHECKLIST = "/cards/{cardId}/checklists?";
     public static final String GET_CARD_MEMBERS = "/cards/{cardId}/members?";
+    public static final String GET_CARD_CUSTOM_FIELDS = "/cards/{cardId}/customFieldItems?";
     public static final String ADD_MEMBER_TO_CARD = "/cards/{cardId}/idMembers?";
     public static final String REMOVE_MEMBER_FROM_CARD = "/cards/{cardId}/idMembers/{idMember}?";
     public static final String DELETE_CARD = "/cards/{cardId}?";
@@ -69,6 +71,7 @@ public class TrelloUrl {
     public static final String UPDATE_CARD_COMMENT = "/cards/{cardId}/actions/{actionId}/comments?";
     public static final String ADD_ATTACHMENT_TO_CARD = "/cards/{cardId}/attachments?";
     public static final String DELETE_ATTACHMENT = "/cards/{cardId}/attachments/{attachmentId}?";
+    public static final String UPDATE_CARD_CUSTOM_FIELD = "/cards/{cardId}/customField/{idCustomField}/item?";
     public static final String UPDATE_CARD = "/cards/{cardId}?";
 
     private String baseUrl;

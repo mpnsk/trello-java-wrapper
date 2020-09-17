@@ -41,6 +41,10 @@ public class Board extends TrelloEntity {
         return trelloService.getBoardCards(id, args);
     }
 
+    public List<CustomFields> fetchCustomFields(Argument... args) {
+        return trelloService.getBoardCustomFields(id, args);
+    }
+
     public Card fetchCard(String cardId, Argument... args) {
         return trelloService.getBoardCard(id, cardId, args);
     }

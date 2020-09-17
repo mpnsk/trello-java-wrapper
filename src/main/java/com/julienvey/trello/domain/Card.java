@@ -48,6 +48,30 @@ public class Card extends TrelloEntity {
         return trelloService.getCardMembers(id, args);
     }
 
+    public List<CustomFieldsItem> fetchCustomFieldsItems(Argument... args) {
+        return trelloService.getCardCustomFieldsItems(id, args);
+    }
+
+    public void updateCustomField(String idCustomFieldCustom, String type, String value) {
+        CustomFieldsItem customFieldsItem = new CustomFieldsItem();
+        customFieldsItem.setValue(new CustomFieldsItem.CustomFieldItemValue());
+        switch (type) {
+            case "text":
+                customFieldsItem.getValue().setText(value);
+                break;
+            case "number":
+                customFieldsItem.getValue().setNumber(value);
+                break;
+            case "checked":
+                customFieldsItem.getValue().setChecked(value);
+                break;
+            case "date":
+                customFieldsItem.getValue().setDate(value);
+                break;
+        }
+        trelloService.updateCustomField(id, idCustomFieldCustom, customFieldsItem);
+    }
+
     public void deleteAttachment(String attachmentId) {
         trelloService.deleteAttachment(id, attachmentId);
     }

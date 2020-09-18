@@ -22,6 +22,8 @@ public interface Trello {
 
     List<Label> getBoardLabels(String boardId, Argument... args);
 
+    TList createBoardList(String boardId, String name);
+
     List<Member> getBoardMembers(String boardId, Argument... args);
 
     List<Card> getBoardMemberCards(String boardId, String memberId, Argument... args);
@@ -223,7 +225,9 @@ public interface Trello {
      */
     Action updateComment(String idCard, String commentActionId, String text);
 
-    Action updateCustomField(String idCard, String idCustomField, CustomFieldsItem item);
+    Action updateCustomField(String idCard, String idCustomField, CustomFieldsItem item, Argument... args);
+
+    Action createCustomField(String idBoard, String type, String name);
 
     void addAttachmentToCard(String idCard, File file);
 

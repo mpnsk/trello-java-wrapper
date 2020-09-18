@@ -93,6 +93,17 @@ public class TrelloImpl implements Trello {
     }
 
     @Override
+    public TList createBoardList(String boardId, String name) {
+        TList tList = new TList();
+        tList.setName(name);
+        tList.setIdBoard(boardId);
+//        TList created = postForObject(createUrl(GET_BOARD_LISTS).params(new Argument("name", name)).asString(), tList, TList.class, boardId);
+        TList created = postForObject(createUrl(GET_BOARD_LISTS).asString(), tList, TList.class, boardId);
+        created.setInternalTrello(this);
+        return created;
+    }
+
+    @Override
     public List<Member> getBoardMembers(String boardId, Argument... args) {
         return asList(() -> get(createUrl(GET_BOARD_MEMBERS).params(args).asString(), Member[].class, boardId));
     }
@@ -159,7 +170,7 @@ public class TrelloImpl implements Trello {
     @Override
     @Deprecated
     public List<CardWithActions> getBoardMemberActivity(String boardId, String memberId,
-            String actionFilter, Argument... args) {
+                                                        String actionFilter, Argument... args) {
         if (actionFilter == null)
             actionFilter = "all";
         Argument[] argsAndFilter = Arrays.copyOf(args, args.length + 1);
@@ -173,10 +184,12 @@ public class TrelloImpl implements Trello {
     public List<Member> getBoardMemberships(String boardId, Argument... args) {
         return asList(() -> get(createUrl(GET_BOARD_MEMBERSHIPS).params(args).asString(), Member[].class, boardId));
     }
+
     @Override
     public List<CustomFields> getBoardCustomFields(String boardId, Argument... args) {
         return asList(() -> get(createUrl(GET_BOARD_CUSTOM_FIELDS).params(args).asString(), CustomFields[].class, boardId));
     }
+
     @Override
     public MyPrefs getBoardMyPrefs(String boardId) {
         MyPrefs myPrefs = get(createUrl(GET_BOARD_MYPREFS).asString(), MyPrefs.class, boardId);
@@ -463,10 +476,22 @@ public class TrelloImpl implements Trello {
     public Action updateComment(String idCard, String commentActionId, String text) {
         return put(createUrlWithNoArgs(UPDATE_CARD_COMMENT), new Comment(text), Action.class, idCard, commentActionId);
     }
+
     @Override
-    public Action updateCustomField(String idCard, String idCustomField, CustomFieldsItem item) {
+    public Action createCustomField(String idBoard, String type, String name) {
+        CustomFields item = new CustomFields();
+        item.setIdModel(idBoard);
+        item.setType(type);
+        item.setName(name);
+        item.setModelType("board");
+        return postForObject(createUrl(CREATE_CUSTOM_FIELD_ON_BOARD).asString(), item, Action.class);
+    }
+
+    @Override
+    public Action updateCustomField(String idCard, String idCustomField, CustomFieldsItem item, Argument... args) {
         return put(createUrlWithNoArgs(UPDATE_CARD_CUSTOM_FIELD), item, Action.class, idCard, idCustomField);
     }
+
     @Override
     public void addAttachmentToCard(String idCard, File file) {
         postFileForObject(createUrl(ADD_ATTACHMENT_TO_CARD).asString(), file, Attachment.class, idCard);

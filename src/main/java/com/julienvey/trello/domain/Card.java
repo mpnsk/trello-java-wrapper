@@ -1,5 +1,6 @@
 package com.julienvey.trello.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -70,10 +71,10 @@ public class Card extends TrelloEntity {
                     customFieldsItem.getValue().setDate(value);
                     break;
             }
+            trelloService.updateCustomField(id, idCustomFieldCustom, customFieldsItem);
         } else {
-            customFieldsItem.setValue(null);
+            trelloService.updateCustomField(id, idCustomFieldCustom, customFieldsItem, new Argument("value", null));
         }
-        trelloService.updateCustomField(id, idCustomFieldCustom, customFieldsItem);
     }
 
     public void deleteAttachment(String attachmentId) {

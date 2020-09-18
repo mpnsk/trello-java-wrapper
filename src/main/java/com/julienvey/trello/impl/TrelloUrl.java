@@ -71,6 +71,7 @@ public class TrelloUrl {
     public static final String UPDATE_CARD_COMMENT = "/cards/{cardId}/actions/{actionId}/comments?";
     public static final String ADD_ATTACHMENT_TO_CARD = "/cards/{cardId}/attachments?";
     public static final String DELETE_ATTACHMENT = "/cards/{cardId}/attachments/{attachmentId}?";
+    public static final String CREATE_CUSTOM_FIELD_ON_BOARD = "/customFields?";
     public static final String UPDATE_CARD_CUSTOM_FIELD = "/cards/{cardId}/customField/{idCustomField}/item?";
     public static final String UPDATE_CARD = "/cards/{cardId}?";
 

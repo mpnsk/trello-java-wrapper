@@ -1,11 +1,10 @@
 package com.julienvey.trello.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomFields extends TrelloEntity {
 
     private String id;
@@ -18,29 +17,6 @@ public class CustomFields extends TrelloEntity {
 
 
     /* API */
-//    public void addLabels(String... labels) {
-//        trelloService.addLabelsToCard(id, labels);
-//    }
-//
-//    public void addComment(String comment) {
-//        trelloService.addCommentToCard(id, comment);
-//    }
-//
-//    public List<Action> getActions(Argument... filters) {
-//        return trelloService.getCardActions(id, filters);
-//    }
-//
-//    public List<Member> fetchMembers(Argument... args) {
-//        return trelloService.getCardMembers(id, args);
-//    }
-//
-//    public void deleteAttachment(String attachmentId) {
-//        trelloService.deleteAttachment(id, attachmentId);
-//    }
-//
-//    public void delete() {
-//        getTrelloService().deleteCard(id);
-//    }
 
     /* Accessors */
 

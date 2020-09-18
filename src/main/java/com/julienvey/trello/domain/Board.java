@@ -29,7 +29,7 @@ public class Board extends TrelloEntity {
     private Date dateLastView;
     private String shortLink;
     private List<String> powerUps;
-    private List<TList> lists  = new ArrayList<>();
+    private List<TList> lists = new ArrayList<>();
 
     /* API */
 
@@ -57,6 +57,10 @@ public class Board extends TrelloEntity {
         return trelloService.getBoardLists(id, args);
     }
 
+    public TList createBoardList(String name) {
+        return trelloService.createBoardList(id, name);
+    }
+
     public List<Member> fetchMembers() {
         return trelloService.getBoardMembers(id);
     }
@@ -79,6 +83,10 @@ public class Board extends TrelloEntity {
 
     public AddMemberToBoardResult addMember(String email, MemberType type, String fullName) {
         return trelloService.addMemberToBoard(id, email, type, fullName);
+    }
+
+    public Action createCustomField(String type, String name) {
+        return trelloService.createCustomField(id, type, name);
     }
 
     public AddMemberToBoardResult addMember(String memberId, MemberType type) {

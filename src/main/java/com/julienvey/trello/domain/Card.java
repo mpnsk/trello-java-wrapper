@@ -31,6 +31,7 @@ public class Card extends TrelloEntity {
     private String shortLink;
     private String shortUrl;
     private boolean subscribed;
+    private List<CustomFieldsItem> customFieldItems;
 
     /* API */
     public void addLabels(String... labels) {
@@ -264,6 +265,14 @@ public class Card extends TrelloEntity {
 
     public Card update() {
         return trelloService.updateCard(this);
+    }
+
+    public List<CustomFieldsItem> getCustomFieldItems() {
+        return customFieldItems;
+    }
+
+    public void setCustomFieldItems(List<CustomFieldsItem> customFieldItems) {
+        this.customFieldItems = customFieldItems;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

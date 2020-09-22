@@ -225,7 +225,7 @@ public interface Trello {
      */
     Action updateComment(String idCard, String commentActionId, String text);
 
-    Action updateCustomField(String idCard, String idCustomField, CustomFieldsItem item, Argument... args);
+    CustomFieldsItem updateCustomField(String idCard, String idCustomField, CustomFieldsItem item, Argument... args);
 
     Action createCustomField(String idBoard, String type, String name);
 

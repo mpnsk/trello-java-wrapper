@@ -65,7 +65,7 @@ public class Card extends TrelloEntity {
                 case "number":
                     customFieldsItem.getValue().setNumber(value);
                     break;
-                case "checked":
+                case "checkbox":
                     customFieldsItem.getValue().setChecked(value);
                     break;
                 case "date":

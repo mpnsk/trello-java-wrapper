@@ -16,6 +16,7 @@ public class Card extends TrelloEntity {
     private String url;
     private Date due;
     private List<String> idMembers;
+    private List<String> idLabels;
     private List<Label> labels;
     private Badges badges;
     private List<CardCheckItem> checkItemStates;
@@ -31,6 +32,7 @@ public class Card extends TrelloEntity {
     private String shortLink;
     private String shortUrl;
     private boolean subscribed;
+    private boolean dueComplete;
     private List<CustomFieldsItem> customFieldItems;
 
     /* API */
@@ -223,6 +225,14 @@ public class Card extends TrelloEntity {
         this.manualCoverAttachment = manualCoverAttachment;
     }
 
+    public List<String> getIdLabels() {
+        return idLabels;
+    }
+
+    public void setIdLabels(List<String> idLabels) {
+        this.idLabels = idLabels;
+    }
+
     public int getPos() {
         return pos;
     }
@@ -273,6 +283,14 @@ public class Card extends TrelloEntity {
 
     public void setCustomFieldItems(List<CustomFieldsItem> customFieldItems) {
         this.customFieldItems = customFieldItems;
+    }
+
+    public boolean isDueComplete() {
+        return dueComplete;
+    }
+
+    public void setDueComplete(boolean dueComplete) {
+        this.dueComplete = dueComplete;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

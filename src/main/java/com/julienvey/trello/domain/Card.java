@@ -34,6 +34,7 @@ public class Card extends TrelloEntity {
     private boolean subscribed;
     private boolean dueComplete;
     private List<CustomFieldsItem> customFieldItems;
+    private Cover cover;
 
     /* API */
     public void addLabels(String... labels) {
@@ -271,6 +272,14 @@ public class Card extends TrelloEntity {
 
     public void setShortUrl(String shortUrl) {
         this.shortUrl = shortUrl;
+    }
+
+    public Cover getCover() {
+        return cover;
+    }
+
+    public void setCover(Cover cover) {
+        this.cover = cover;
     }
 
     public Card update() {

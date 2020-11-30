@@ -1,5 +1,6 @@
 package com.julienvey.trello.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class Card extends TrelloEntity {
     private Date due;
     private boolean dueComplete;
     private List<String> idMembers;
+    private List<String> idLabels;
     private List<Label> labels;
     private Badges badges;
     private List<CardCheckItem> checkItemStates;
@@ -31,6 +33,10 @@ public class Card extends TrelloEntity {
     private String shortLink;
     private String shortUrl;
     private boolean subscribed;
+    private boolean dueComplete;
+    private List<CustomFieldsItem> customFieldItems;
+    private Cover cover;
+    private List<Attachment> attachments;
 
     /* API */
     public void addLabels(String... labels) {
@@ -47,6 +53,34 @@ public class Card extends TrelloEntity {
 
     public List<Member> fetchMembers(Argument... args) {
         return trelloService.getCardMembers(id, args);
+    }
+
+    public List<CustomFieldsItem> fetchCustomFieldsItems(Argument... args) {
+        return trelloService.getCardCustomFieldsItems(id, args);
+    }
+
+    public void updateCustomField(String idCustomFieldCustom, String type, String value) {
+        CustomFieldsItem customFieldsItem = new CustomFieldsItem();
+        if (value != null) {
+            customFieldsItem.setValue(new CustomFieldsItem.CustomFieldItemValue());
+            switch (type) {
+                case "text":
+                    customFieldsItem.getValue().setText(value);
+                    break;
+                case "number":
+                    customFieldsItem.getValue().setNumber(value);
+                    break;
+                case "checkbox":
+                    customFieldsItem.getValue().setChecked(value);
+                    break;
+                case "date":
+                    customFieldsItem.getValue().setDate(value);
+                    break;
+            }
+            trelloService.updateCustomField(id, idCustomFieldCustom, customFieldsItem);
+        } else {
+            trelloService.updateCustomField(id, idCustomFieldCustom, customFieldsItem, new Argument("value", null));
+        }
     }
 
     public void deleteAttachment(String attachmentId) {
@@ -202,6 +236,14 @@ public class Card extends TrelloEntity {
         this.manualCoverAttachment = manualCoverAttachment;
     }
 
+    public List<String> getIdLabels() {
+        return idLabels;
+    }
+
+    public void setIdLabels(List<String> idLabels) {
+        this.idLabels = idLabels;
+    }
+
     public long getPos() {
         return pos;
     }
@@ -242,8 +284,40 @@ public class Card extends TrelloEntity {
         this.shortUrl = shortUrl;
     }
 
+    public Cover getCover() {
+        return cover;
+    }
+
+    public void setCover(Cover cover) {
+        this.cover = cover;
+    }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
+    }
+
     public Card update() {
         return trelloService.updateCard(this);
+    }
+
+    public List<CustomFieldsItem> getCustomFieldItems() {
+        return customFieldItems;
+    }
+
+    public void setCustomFieldItems(List<CustomFieldsItem> customFieldItems) {
+        this.customFieldItems = customFieldItems;
+    }
+
+    public boolean isDueComplete() {
+        return dueComplete;
+    }
+
+    public void setDueComplete(boolean dueComplete) {
+        this.dueComplete = dueComplete;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

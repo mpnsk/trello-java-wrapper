@@ -17,6 +17,9 @@ public class Attachment extends TrelloEntity {
     private String name;
     private List<Preview> previews;
     private String url;
+    private Integer pos;
+    private String fileName;
+    private String edgeColor;
 
     public Attachment() {}
 
@@ -94,6 +97,30 @@ public class Attachment extends TrelloEntity {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getPos() {
+        return pos;
+    }
+
+    public void setPos(Integer pos) {
+        this.pos = pos;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getEdgeColor() {
+        return edgeColor;
+    }
+
+    public void setEdgeColor(String edgeColor) {
+        this.edgeColor = edgeColor;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

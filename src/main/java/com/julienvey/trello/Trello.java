@@ -3,22 +3,7 @@ package com.julienvey.trello;
 import java.io.File;
 import java.util.List;
 
-import com.julienvey.trello.domain.Action;
-import com.julienvey.trello.domain.AddMemberToBoardResult;
-import com.julienvey.trello.domain.Argument;
-import com.julienvey.trello.domain.Attachment;
-import com.julienvey.trello.domain.Board;
-import com.julienvey.trello.domain.Card;
-import com.julienvey.trello.domain.CardWithActions;
-import com.julienvey.trello.domain.CheckItem;
-import com.julienvey.trello.domain.CheckList;
-import com.julienvey.trello.domain.Entity;
-import com.julienvey.trello.domain.Label;
-import com.julienvey.trello.domain.Member;
-import com.julienvey.trello.domain.MemberType;
-import com.julienvey.trello.domain.MyPrefs;
-import com.julienvey.trello.domain.Organization;
-import com.julienvey.trello.domain.TList;
+import com.julienvey.trello.domain.*;
 
 public interface Trello {
 
@@ -36,6 +21,8 @@ public interface Trello {
     List<TList> getBoardLists(String boardId, Argument... args);
 
     List<Label> getBoardLabels(String boardId, Argument... args);
+
+    TList createBoardList(String boardId, String name);
 
     List<Member> getBoardMembers(String boardId, Argument... args);
 
@@ -81,6 +68,8 @@ public interface Trello {
 
     List<Member> getBoardMemberships(String boardId, Argument... args);
 
+    List<CustomFields> getBoardCustomFields(String boardId, Argument... args);
+
     MyPrefs getBoardMyPrefs(String boardId);
 
     Organization getBoardOrganization(String boardId, Argument... args);
@@ -112,6 +101,8 @@ public interface Trello {
     List<Attachment> getCardAttachments(String cardId, Argument... args);
 
     List<Member> getCardMembers(String cardId, Argument... args);
+
+    List<CustomFieldsItem> getCardCustomFieldsItems(String cardId, Argument... args);
 
     Attachment getCardAttachment(String cardId, String attachmentId, Argument... args);
 
@@ -235,6 +226,10 @@ public interface Trello {
      * @return The updated action.
      */
     Action updateComment(String idCard, String commentActionId, String text);
+
+    CustomFieldsItem updateCustomField(String idCard, String idCustomField, CustomFieldsItem item, Argument... args);
+
+    Action createCustomField(String idBoard, String type, String name);
 
     void addAttachmentToCard(String idCard, File file);
 

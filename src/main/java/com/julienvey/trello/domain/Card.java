@@ -1,6 +1,5 @@
 package com.julienvey.trello.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +32,6 @@ public class Card extends TrelloEntity {
     private String shortLink;
     private String shortUrl;
     private boolean subscribed;
-    private boolean dueComplete;
     private List<CustomFieldsItem> customFieldItems;
     private Cover cover;
     private List<Attachment> attachments;
@@ -131,14 +129,6 @@ public class Card extends TrelloEntity {
     public void setDue(Date due) {
         this.due = due;
     }
-
-    public boolean isDueComplete() {
-		return dueComplete;
-	}
-
-	public void setDueComplete(boolean dueComplete) {
-		this.dueComplete = dueComplete;
-	}
 
 	public List<String> getIdMembers() {
         return idMembers;

@@ -10,6 +10,7 @@ import static com.julienvey.trello.impl.TrelloUrl.ADD_MEMBER_TO_BOARD_BY_ID;
 import static com.julienvey.trello.impl.TrelloUrl.ADD_MEMBER_TO_CARD;
 import static com.julienvey.trello.impl.TrelloUrl.CREATE_CARD;
 import static com.julienvey.trello.impl.TrelloUrl.CREATE_CHECKLIST;
+import static com.julienvey.trello.impl.TrelloUrl.CREATE_CUSTOM_FIELD_ON_BOARD;
 import static com.julienvey.trello.impl.TrelloUrl.CREATE_LABEL;
 import static com.julienvey.trello.impl.TrelloUrl.DELETE_ATTACHMENT;
 import static com.julienvey.trello.impl.TrelloUrl.DELETE_CARD;
@@ -27,6 +28,7 @@ import static com.julienvey.trello.impl.TrelloUrl.GET_BOARD_ACTIONS;
 import static com.julienvey.trello.impl.TrelloUrl.GET_BOARD_CARD;
 import static com.julienvey.trello.impl.TrelloUrl.GET_BOARD_CARDS;
 import static com.julienvey.trello.impl.TrelloUrl.GET_BOARD_CHECKLISTS;
+import static com.julienvey.trello.impl.TrelloUrl.GET_BOARD_CUSTOM_FIELDS;
 import static com.julienvey.trello.impl.TrelloUrl.GET_BOARD_LABELS;
 import static com.julienvey.trello.impl.TrelloUrl.GET_BOARD_LISTS;
 import static com.julienvey.trello.impl.TrelloUrl.GET_BOARD_MEMBERS;
@@ -40,6 +42,7 @@ import static com.julienvey.trello.impl.TrelloUrl.GET_CARD_ATTACHMENT;
 import static com.julienvey.trello.impl.TrelloUrl.GET_CARD_ATTACHMENTS;
 import static com.julienvey.trello.impl.TrelloUrl.GET_CARD_BOARD;
 import static com.julienvey.trello.impl.TrelloUrl.GET_CARD_CHECKLIST;
+import static com.julienvey.trello.impl.TrelloUrl.GET_CARD_CUSTOM_FIELDS;
 import static com.julienvey.trello.impl.TrelloUrl.GET_CARD_MEMBERS;
 import static com.julienvey.trello.impl.TrelloUrl.GET_CHECK_LIST;
 import static com.julienvey.trello.impl.TrelloUrl.GET_LABEL;
@@ -56,6 +59,7 @@ import static com.julienvey.trello.impl.TrelloUrl.REMOVE_MEMBER_FROM_BOARD;
 import static com.julienvey.trello.impl.TrelloUrl.REMOVE_MEMBER_FROM_CARD;
 import static com.julienvey.trello.impl.TrelloUrl.UPDATE_CARD;
 import static com.julienvey.trello.impl.TrelloUrl.UPDATE_CARD_COMMENT;
+import static com.julienvey.trello.impl.TrelloUrl.UPDATE_CARD_CUSTOM_FIELD;
 import static com.julienvey.trello.impl.TrelloUrl.UPDATE_LABEL;
 import static com.julienvey.trello.impl.TrelloUrl.createUrl;
 import static com.julienvey.trello.impl.TrelloUrl.createUrlWithNoArgs;
@@ -72,6 +76,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import com.julienvey.trello.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,25 +85,9 @@ import com.julienvey.trello.NotFoundException;
 import com.julienvey.trello.Trello;
 import com.julienvey.trello.TrelloBadRequestException;
 import com.julienvey.trello.TrelloHttpClient;
-import com.julienvey.trello.domain.Action;
-import com.julienvey.trello.domain.AddMemberToBoardResult;
-import com.julienvey.trello.domain.Argument;
-import com.julienvey.trello.domain.Attachment;
-import com.julienvey.trello.domain.Board;
-import com.julienvey.trello.domain.Card;
-import com.julienvey.trello.domain.CardWithActions;
-import com.julienvey.trello.domain.CheckItem;
-import com.julienvey.trello.domain.CheckList;
-import com.julienvey.trello.domain.Entity;
-import com.julienvey.trello.domain.Label;
-import com.julienvey.trello.domain.Member;
-import com.julienvey.trello.domain.MemberType;
-import com.julienvey.trello.domain.MyPrefs;
-import com.julienvey.trello.domain.Organization;
-import com.julienvey.trello.domain.TList;
-import com.julienvey.trello.domain.TrelloEntity;
 import com.julienvey.trello.impl.domaininternal.Comment;
 import com.julienvey.trello.impl.http.JDKTrelloHttpClient;
+
 
 public class TrelloImpl implements Trello {
 
